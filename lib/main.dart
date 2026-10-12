@@ -9,22 +9,17 @@ void main() {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
+  static TextStyle nameTextStyle = TextStyle(fontSize: 20, color: Color(0xFFCCDAD1), fontWeight: FontWeight.bold);
+  static TextStyle buttonTextStyle = TextStyle(fontSize: 20, color: Color(0xFFCCDAD1));
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle nameTextStyle = TextStyle();
-    const TextStyle buttonTextStyle = TextStyle();
-    
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        pageTransitionsTheme: const PageTransitionsTheme(
-          builders: {
-            TargetPlatform.windows: NoTransitionsBuilder(),
-            TargetPlatform.android: NoTransitionsBuilder(),
-            TargetPlatform.iOS: NoTransitionsBuilder(),
-          },
+        scaffoldBackgroundColor: Color(0xFF231D26),
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: Map.fromIterable(TargetPlatform.values, value: (_) => NoTransitionsBuilder())
         ),
       ),
       initialRoute: '/',
@@ -43,13 +38,15 @@ class MainApp extends StatelessWidget {
   }
 
   Widget buildView(BuildContext context, String screen) {
+    EdgeInsets buttonInsets = const EdgeInsets.all(12);
     return Scaffold(
         appBar: AppBar(
-          title: Text("Dillon Roper"),
+          backgroundColor: Color(0xFF3E2056),
+          title: Text("Dillon Roper", style: nameTextStyle),
           actions: [
-            ElevatedButton(onPressed: () {changeScreen(context, '/');}, child: Text('Home')),
-            ElevatedButton(onPressed: () {changeScreen(context, 'resume');}, child: Text('Résumé')),
-            ElevatedButton(onPressed: () {changeScreen(context, 'projects');}, child: Text('Projects')),
+            InkWell(onTap: () {changeScreen(context, '/');}, child: Padding(padding: buttonInsets, child: Text('Home', style: buttonTextStyle))),
+            InkWell(onTap: () {changeScreen(context, 'resume');}, child: Padding(padding: buttonInsets, child: Text('Resume', style: buttonTextStyle))),
+            InkWell(onTap: () {changeScreen(context, 'projects');}, child: Padding(padding: buttonInsets, child: Text('Projects', style: buttonTextStyle))),
           ],
         ),
         body: SafeArea(
