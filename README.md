@@ -1,3 +1,3 @@
 # my_website
 
-A new Flutter project.
+The code behind my personal website, written in the Dart language using the Flutter framework.
